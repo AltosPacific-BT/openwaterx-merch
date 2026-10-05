@@ -1,4 +1,6 @@
-# OpenWaterUnion Store
+# OWUnion Store
+
+Naming: the store is now **OWUnion**. OpenWaterUnion, Open Water X, and openwaterx are synonyms from earlier work, kept as written. See `docs/NAMING.md`.
 
 WooCommerce store for OpenWaterUnion.com on WP Engine: one site, one cart, eight branded stores (core Brands), four product types, Elementor Pro Theme Builder headers.
 
