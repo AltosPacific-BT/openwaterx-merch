@@ -84,7 +84,7 @@ Portland Gear tracks headings at -0.05em. That suits mixed case Helvetica, not c
 | Color 4 | Headings | #0E0E0E |
 | Color 5 | Borders | #DBDBDB |
 | Color 6 | Light fills | #EBEBEB |
-| Color 7 | Site background | #FFFFFF |
+| Color 7 | Site background (some installs point it at Color 8; both are white) | #FFFFFF |
 | Color 8 | White | #FFFFFF |
 
 **Customize, WooCommerce, General.** `S` for the fields.
@@ -128,7 +128,7 @@ The message colors are the reference values with the text darkened to pass contr
 | Border Color | #DBDBDB, focus #0E0E0E |
 | Background Color | #FFFFFF |
 
-**Customize, General, Layout.** Maximum Site Width 1360px. Content Edge Spacing takes viewport units only (0 to 15vw): 2vw desktop, 3vw tablet, 5vw mobile, which is about 20px on a 390px phone. Wider screens are governed by the 1360px cap. `S`
+**Customize, General, Layout.** Maximum Site Width 1360px. Content Edge Spacing is relative to screen width, not pixels: 1.5 desktop, 3 tablet, 5 mobile, which is about 20px on a 1280px laptop and on a 390px phone. Wider screens are governed by the 1360px cap. `S`, applied in the first Chrome run
 
 **Customize, General, Breadcrumbs.** Breadcrumbs Source: Default (a Yoast or Rank Math source bypasses the store crumb). Home Page Text "OWUnion". Shop Page in Breadcrumbs off. Single Page/Post Title off. Archive Taxonomy Title on. With the store status plugin 0.2.0, product pages read OWUnion / Swim Alcatraz / Hoodies. `S`
 
@@ -173,10 +173,12 @@ Cart, checkout, and account match none of these, so they keep the parent header,
 | Product Gallery | Lightbox | On | `S` |
 | Product Elements | Sticky Container | On. The summary column stays in view while the gallery scrolls | `S` |
 | Product Elements | Order | Breadcrumbs, Title, Price, Add to Cart, Additional Info, Divider, Short Description | `S` |
-| Product Elements | Star Rating, Payment Methods, Meta | Off for now | `S` |
+| Product Elements | Star Rating, Payment Methods, Meta, second Divider | Off for now | `S` |
+| Product Tabs | Type | Type 3, the accordion. Module Placement: Summary, so it sits in the right column like the reference's accordions. First Tab Expanded off. Title font Inter 700, 16px, -0.02em | `S` |
+| Related and Upsells | Module | On (spec functionality 15). Module Title Font Barlow Condensed 700, uppercase, 26px desktop, 20px mobile | `S` |
 | Add to Cart | Button Width | 100% | `S` |
 | Add to Cart | Button Height | 58px desktop and tablet, 52px mobile | `S` |
-| Additional Info | Items | Two lines with icons: free shipping over $100 to the lower 48 and DC, and the returns policy once written | `S` |
+| Additional Info | Title, Items | No title (clear the default "Reasons to Buy"). One line for now, truck icon: "Free shipping on orders over $100 to the lower 48 states and DC." The returns line follows in v1.1 (1.1-06) | `S` |
 
 **Swatches and size pills.** Blocksy Pro's WooCommerce extension has variation swatches: Color as round color swatches, Size as button swatches. Use it instead of a separate swatch plugin. `K`
 
@@ -191,7 +193,7 @@ Cart, checkout, and account match none of these, so they keep the parent header,
 | Cards type | The plainest type, image on top and text below |
 | Columns | 4 desktop, 3 tablet, 2 mobile |
 | Columns Gap, Rows Gap | 20px, 32px |
-| Card image ratio | 1:1 |
+| Card image ratio | 1:1, set inside Card Options, Product Image layer, Image Ratio |
 | Card Add to Cart | Off, for a clean grid like the reference |
 | Card title font, price font | Section 2 |
 
