@@ -201,12 +201,13 @@ The column counts are an OWUnion choice. The dissection covered only the product
 
 ## 8. Additional CSS
 
-Paste `blocksy/owunion-additional.css` into Appearance, Customize, Additional CSS. Four items, `T` against Blocksy 2.1.58:
+Paste `blocksy/owunion-additional.css` into Appearance, Customize, Additional CSS. Five items, `T` against Blocksy 2.1.58:
 
 1. Pill fields get 20px side padding so text clears the curve. Textareas keep a 16px radius
 2. Product photos sit on #EBEBEB, so transparent or off size images still read as tiles
 3. The `owu-logo-reversed` class for the footer logo
-4. A commented template for per store accents. Blocksy builds its button and link colors from palette Color 1 on `:root`, so a store override must also sit on `:root`, using `:root:has(> body.store-{slug})`. Tested: a store override recolors buttons on that store's pages only
+4. Store tiles from `[owunion_active_stores layout="tiles"]`: a grid of square tiles on #EBEBEB, four columns on desktop and two on phones, with a gray tile for stores without an image
+5. A commented template for per store accents. Blocksy builds its button and link colors from palette Color 1 on `:root`, so a store override must also sit on `:root`, using `:root:has(> body.store-{slug})`. Tested: a store override recolors buttons on that store's pages only
 
 ## 9. Contrast fixes to the reference
 

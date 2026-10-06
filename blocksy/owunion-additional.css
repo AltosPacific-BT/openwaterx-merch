@@ -4,7 +4,7 @@
  * settings in docs/reference/portlandgear-to-blocksy.md. Staging first.
  *
  * Blocksy's Customizer carries the fonts, colors, buttons, form fields, header,
- * footer, and WooCommerce layouts. This file covers the four things it does not.
+ * footer, and WooCommerce layouts. This file covers the five things it does not.
  * Checked in Chromium against Blocksy 2.1.58 stylesheets.
  */
 
@@ -33,7 +33,51 @@ textarea {
 	mix-blend-mode: screen;
 }
 
-/* 4. Per store accent, for later. The store status plugin adds store-{slug} to body.
+/* 4. Store tiles from [owunion_active_stores layout="tiles"]: square images on the
+   shoot gray, store name below. Two columns on phones, four on desktop. */
+.owunion-stores--tiles {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 20px;
+}
+
+@media (min-width: 1000px) {
+	.owunion-stores--tiles {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+.owunion-stores--tiles a {
+	display: grid;
+	gap: 10px;
+	text-decoration: none;
+	color: var(--theme-text-color);
+}
+
+.owunion-stores--tiles img,
+.owunion-stores--tiles a::before {
+	aspect-ratio: 1 / 1;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	background-color: #EBEBEB;
+}
+
+/* A store with no thumbnail still gets a gray tile. */
+.owunion-stores--tiles a:not(:has(img))::before {
+	content: "";
+	display: block;
+}
+
+.owunion-stores--tiles .owunion-store__name {
+	font-weight: 500;
+	font-size: 15px;
+}
+
+/* 5. Per store accent, for later. The store status plugin adds store-{slug} to body.
    Blocksy builds button and link colors from palette Color 1 and 2 on :root,
    so the override goes on :root as well. Check contrast at 4.5:1 before use.
 :root:has(> body.store-swim-alcatraz) {
