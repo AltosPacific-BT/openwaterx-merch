@@ -128,7 +128,9 @@ The message colors are the reference values with the text darkened to pass contr
 | Border Color | #DBDBDB, focus #0E0E0E |
 | Background Color | #FFFFFF |
 
-**Customize, General, Layout.** Maximum Site Width 1360px. Content Edge Spacing 20px if it accepts pixels, otherwise the nearest percentage. `S` for the fields.
+**Customize, General, Layout.** Maximum Site Width 1360px. Content Edge Spacing takes viewport units only (0 to 15vw): 2vw desktop, 3vw tablet, 5vw mobile, which is about 20px on a 390px phone. Wider screens are governed by the 1360px cap. `S`
+
+**Customize, General, Breadcrumbs.** Breadcrumbs Source: Default (a Yoast or Rank Math source bypasses the store crumb). Home Page Text "OWUnion". Shop Page in Breadcrumbs off. Single Page/Post Title off. Archive Taxonomy Title on. With the store status plugin 0.2.0, product pages read OWUnion / Swim Alcatraz / Hoodies. `S`
 
 ## 5. Header and footer
 
@@ -136,7 +138,7 @@ The message colors are the reference values with the text darkened to pass contr
 
 1. **Top row, the announcement bar.** Height 43px, background #0E0E0E. One Text element, centered: "Free shipping on orders over $100 to the lower 48 states and DC." (spec section 6, item 9). Inter 500, 12px, white, underlined link.
 2. **Main row.** Height 72px, white, no border or shadow.
-   * Left: Logo, width 140px desktop and 112px mobile. The logo is 2.87 times wider than tall, so 140px wide is 49px tall
+   * Left: Logo. Blocksy sizes logos by height: Logo Height 49px desktop and tablet, 39px mobile, which gives 140px and 112px wide (the logo is 2.87 times wider than tall)
    * Middle: Menu, Inter 700 16px, no uppercase, active item marked by an underline indicator in #0E0E0E
    * Right: Search, Account, and Cart, icon only, about 20px
 3. **Mobile.** Trigger left, logo center, cart right. The off canvas panel holds the Mobile Menu.
@@ -146,6 +148,9 @@ The message colors are the reference values with the text darkened to pass contr
 * An Image block with the logo, Additional CSS class `owu-logo-reversed`, which turns the black JPG white with no visible box. Use it until reversed vector logos exist
 * A Shortcode block with `[owunion_active_stores layout="list" exclude="owunion"]` from the store status plugin, so hidden stores drop out
 * Help links (Shipping, Returns, Size guide, Contact) and Legal links (Privacy, Terms)
+* Bottom row Copyright element: replace Blocksy's default, which credits the theme maker, with "© {current_year} Pacific Open Water Swim Co."
+
+Row by row prompts for Claude in Chrome: `blocksy/claude-in-chrome-header-footer.md`.
 
 **Per store headers (decided 2026-10-06, decision 004; replaces spec section 5.3).** Blocksy Pro can keep several headers and pick one by display conditions. `K` for the multiple header screen. The conditions engine is in Companion and supports exactly what the spec needs. `S`
 
@@ -161,6 +166,7 @@ Cart, checkout, and account match none of these, so they keep the parent header,
 
 | Panel | Setting | Value | Label |
 |---|---|---|---|
+| Page Title | Product Title switch | Off. Otherwise the title and breadcrumbs show twice, once above the product and once in the summary | `S` |
 | Product Gallery | Gallery type | Stacked (Pro). Two columns if your version offers it, otherwise one | `K` |
 | Product Gallery | Container Width | 55% | `S` |
 | Product Gallery | Image Ratio | 1:1 | `S` |

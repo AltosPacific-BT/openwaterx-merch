@@ -24,6 +24,14 @@ Copy `owunion-store-status/` to `wp-content/plugins/` on staging, then activate.
 * A status change purges WP Engine caches when `WpeCommon` exists, and fires `owunion_store_status_changed( $term_id, $old, $new )` and `owunion_caches_purged` for other cache layers.
 * Adds a `store-{slug}` body class on store and product pages, for per store CSS.
 
+## Breadcrumb
+
+On product pages the Blocksy breadcrumb gains the store: OWUnion / Swim Alcatraz / Hoodies. Blocksy builds product breadcrumbs from categories only, so the plugin inserts the product's store before the category, linked to the store page. It uses Blocksy's `blocksy:breadcrumbs:items-array` filter, so it reaches every Blocksy breadcrumb, including the Breadcrumbs layer in the product summary.
+
+Requires Customize, General, Breadcrumbs, Breadcrumbs Source set to Default. With Yoast or Rank Math as the source, Blocksy renders that plugin's trail and this filter does not run.
+
+The parent store is left out because it is already the home item. Its slug is assumed to be `owunion`; if it differs, filter `owunion_breadcrumb_skip_stores`. Set the home item text to "OWUnion" in Customize, General, Breadcrumbs.
+
 ## Shortcode
 
 `[owunion_active_stores layout="list|tiles" exclude="owunion"]` lists Active stores. Put it in an Elementor Shortcode widget for tiles and menus. Use `exclude` to leave out the parent store. Hand built menu links to a Brand are also dropped when it is Hidden.
@@ -41,6 +49,7 @@ Copy `owunion-store-status/` to `wp-content/plugins/` on staging, then activate.
 5. Your SEO plugin sitemap omits Hidden stores. WordPress core sitemaps do. Yoast, Rank Math, and AIOSEO use their own queries.
 6. WooCommerce Store API (blocks) product queries. Not filtered yet. Elementor widgets use classic queries.
 7. Stripe wallet buttons are unaffected.
+8. A Swim Alcatraz product shows OWUnion / Swim Alcatraz / Hoodies, and the store crumb opens the store page.
 
 ## Not in this version
 

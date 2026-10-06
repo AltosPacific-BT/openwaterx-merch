@@ -32,13 +32,14 @@ Step 3, buttons. General, Buttons: Min Height 46px, Font Color #FFFFFF initial a
 
 Step 4, form fields. General, Form Elements: type Classic, Height 46px, Border Size 1px, Border Radius 60px, Font Inter 400 16px, Font Color #0E0E0E, Border Color #DBDBDB initial and #0E0E0E focus, Background Color #FFFFFF initial and focus.
 
-Step 5, layout. General, Layout: Maximum Site Width 1360px. Content Edge Spacing 20px if it accepts pixels; otherwise tell me the unit and leave it.
+Step 5, layout. General, Layout: Maximum Site Width 1360px. Content Edge Spacing 2vw desktop, 3vw tablet, 5vw mobile.
 
 Step 6, WooCommerce general. WooCommerce, General:
 * Messages: Success text #67672B, background #E4E4D5. Info text #A0563F, background #F5ECE9. Error text #AE2525, background #F3CCCC. Button font #FFFFFF and button background #0E0E0E for all three
 * Product Badges: Sale Badge text #FFFFFF, background #CB2B2B. Out of Stock Badge text #0E0E0E, background #D9D9D9
 
 Step 7, product page. WooCommerce, Single Product:
+* Page Title: Product Title switch off, so the title and breadcrumbs appear only in the summary
 * Product Gallery: Container Width 55%, Image Ratio 1:1, Lightbox on. If a gallery type choice exists, tell me the options; do not change it
 * Product Elements: Sticky Container on. Title Font Barlow Condensed 700, 38px desktop, 34px tablet, 30px mobile, line height 1.05, uppercase. Price Font Inter 400, 20px, line height 28px. Breadcrumbs Font Inter 400, 14px
 * Layers, in this order and enabled: Breadcrumbs, Title, Price, Add to Cart, Additional Info, Divider, Short Description. Disable Star Rating, Payment Methods, and Meta. List any other layers you see
