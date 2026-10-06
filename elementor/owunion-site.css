@@ -1,0 +1,273 @@
+/*
+ * OWUnion site CSS, v1
+ * Paste into Elementor, Site Settings, Custom CSS. Staging first.
+ * Guide: docs/reference/portlandgear-to-elementor.md
+ *
+ * Elementor Site Settings carry the fonts, colors, buttons, and form fields.
+ * This file covers what they do not reach: WooCommerce buttons and selects,
+ * product image tiles, prices, notices, and five helper classes.
+ * Selectors were checked against WooCommerce 11.1.2, Hello Elementor 3.5.1,
+ * and Elementor's kit selectors.
+ */
+
+/* 1. Tokens. Ink and the fonts follow Elementor Global Colors and Fonts.
+   Declared on body because Elementor sets its globals on the body kit class. */
+body {
+	--owu-ink: var(--e-global-color-primary, #0E0E0E);
+	--owu-paper: #FFFFFF;
+	--owu-border: #DBDBDB;
+	--owu-tile: #EBEBEB;
+	--owu-charcoal: #303030;
+	--owu-muted: #767676;
+	--owu-sale: #CB2B2B;
+	--owu-accent: var(--e-global-color-accent, var(--owu-ink));
+	--owu-pill: 60px;
+	--owu-font-display: var(--e-global-typography-primary-font-family, "Barlow Condensed"), "Arial Narrow", sans-serif;
+	--owu-font-ui: var(--e-global-typography-text-font-family, "Inter"), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+	/* WooCommerce form variables */
+	--wc-form-border-color: var(--owu-border);
+	--wc-form-border-radius: var(--owu-pill);
+	--wc-form-border-width: 1px;
+	--wc-form-color-text: var(--owu-ink);
+}
+
+/* Per store accent. The store status plugin adds store-{slug} to body, so overriding
+   Elementor's Accent global here recolors every widget set to Accent on that store's pages.
+   Use accents for fills, borders, and icons. Text, or white text on the accent, only at 4.5:1 or better.
+body.store-swim-alcatraz { --e-global-color-accent: #000000; }
+*/
+
+/* 2. Links inside running text. Link color equals text color, so the underline is what marks a link. */
+.elementor-widget-text-editor a:not(.elementor-button),
+.elementor-widget-woocommerce-product-content a,
+.woocommerce-product-details__short-description a,
+.woocommerce-Tabs-panel a,
+.owu-announcement a {
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+/* 3. WooCommerce buttons: ink pills. Replaces the WooCommerce purple and gray. */
+html :is(.woocommerce, .woocommerce-page) :is(a, button, input).button,
+html :is(.woocommerce, .woocommerce-page) :is(a, button, input).button.alt,
+html .woocommerce #respond input#submit,
+html .wc-block-components-button:not(.is-link) {
+	font-family: var(--owu-font-ui);
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: 0;
+	text-transform: none;
+	color: var(--owu-paper);
+	background-color: var(--owu-ink);
+	border: 0;
+	border-radius: var(--owu-pill);
+	padding: 16px 24px;
+}
+
+html :is(.woocommerce, .woocommerce-page) :is(a, button, input).button:hover,
+html :is(.woocommerce, .woocommerce-page) :is(a, button, input).button.alt:hover,
+html .woocommerce #respond input#submit:hover,
+html .wc-block-components-button:not(.is-link):hover {
+	color: var(--owu-paper);
+	background-color: var(--owu-charcoal);
+}
+
+/* WooCommerce styles disabled buttons with long selectors, so two values need !important. */
+html :is(.woocommerce, .woocommerce-page) :is(a, button, input).button:is(.disabled, :disabled) {
+	color: var(--owu-paper) !important;
+	background-color: var(--owu-ink) !important;
+	opacity: .4;
+}
+
+/* Add to Cart on the product page: full width, larger, per the reference */
+html :is(.woocommerce, .woocommerce-page) div.product form.cart button.single_add_to_cart_button {
+	font-size: 18px;
+	padding: 20px 24px;
+	float: none;
+	display: block;
+	width: 100%;
+}
+
+/* 4. Fields Elementor's Form Fields setting does not reach */
+html :is(.woocommerce, .woocommerce-page) select,
+html :is(.woocommerce, .woocommerce-page) .quantity .qty {
+	font-family: var(--owu-font-ui);
+	font-size: 16px; /* 16px or more stops iOS from zooming on focus */
+	color: var(--owu-ink);
+	background-color: var(--owu-paper);
+	border: 1px solid var(--owu-border);
+	border-radius: var(--owu-pill);
+	padding: 12px 20px;
+}
+
+html :is(.woocommerce, .woocommerce-page) .quantity .qty {
+	width: 5em;
+	padding-inline: 8px;
+}
+
+html .select2-container--default .select2-selection--single {
+	height: auto;
+	border: 1px solid var(--owu-border);
+	border-radius: var(--owu-pill);
+}
+
+html .select2-container--default .select2-selection--single .select2-selection__rendered {
+	font-size: 16px;
+	line-height: 46px;
+	color: var(--owu-ink);
+	padding-left: 20px;
+	padding-right: 40px;
+}
+
+html .select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 46px;
+	right: 14px;
+}
+
+/* A pill textarea looks broken. Keep fields rounded, not pills. */
+:root body textarea,
+html :is(.woocommerce, .woocommerce-page) form .form-row textarea.input-text {
+	border-radius: 16px;
+}
+
+/* 5. Product image tiles: square, on the shoot gray */
+html :is(.woocommerce, .woocommerce-page) ul.products li.product a img,
+html :is(.woocommerce, .woocommerce-page) div.product div.images .woocommerce-product-gallery__image img:not(.zoomImg) {
+	aspect-ratio: 1 / 1;
+	object-fit: contain;
+	background-color: var(--owu-tile);
+	width: 100%;
+	height: auto;
+}
+
+/* Two column gallery grid. Active only with the gallery grid snippet (body class owu-gallery-grid). */
+html body.owu-gallery-grid div.product div.images .woocommerce-product-gallery__wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4px;
+}
+
+html body.owu-gallery-grid div.product div.images .woocommerce-product-gallery__image:nth-child(n) {
+	width: 100%;
+	display: block;
+}
+
+@media (max-width: 767px) {
+	html body.owu-gallery-grid div.product div.images .woocommerce-product-gallery__wrapper {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* 6. Product cards and prices */
+html :is(.woocommerce, .woocommerce-page) ul.products li.product .woocommerce-loop-product__title {
+	font-family: var(--owu-font-ui);
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 1.3;
+	letter-spacing: 0;
+	text-transform: none;
+	color: var(--owu-ink);
+	padding: 12px 0 4px;
+}
+
+html :is(.woocommerce, .woocommerce-page) :is(div.product, ul.products li.product) .price {
+	color: var(--owu-ink);
+	font-weight: 400;
+}
+
+html :is(.woocommerce, .woocommerce-page) :is(div.product, ul.products li.product) .price del {
+	color: var(--owu-muted);
+	opacity: 1;
+}
+
+html :is(.woocommerce, .woocommerce-page) :is(div.product, ul.products li.product) .price ins {
+	color: var(--owu-sale);
+	font-weight: 400;
+	text-decoration: none;
+}
+
+html :is(.woocommerce, .woocommerce-page) span.onsale,
+html :is(.woocommerce, .woocommerce-page) ul.products li.product .onsale {
+	top: 12px;
+	left: 12px;
+	right: auto;
+	margin: 0;
+	min-width: 0;
+	min-height: 0;
+	padding: 6px 12px;
+	font-family: var(--owu-font-ui);
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1;
+	color: var(--owu-paper);
+	background-color: var(--owu-sale);
+	border-radius: var(--owu-pill);
+}
+
+/* 7. Notices. Reference backgrounds, text darkened to pass 4.5:1. */
+html :is(.woocommerce-message, .woocommerce-info, .woocommerce-error) {
+	font-family: var(--owu-font-ui);
+	border-top: 0;
+	border-radius: 12px;
+}
+
+html .woocommerce-message { background-color: #E4E4D5; color: #67672B; }
+html .woocommerce-info { background-color: #F5ECE9; color: #A0563F; }
+html .woocommerce-error { background-color: #F3CCCC; color: #AE2525; }
+html .woocommerce-message::before { color: #67672B; }
+html .woocommerce-info::before { color: #A0563F; }
+html .woocommerce-error::before { color: #AE2525; }
+
+/* 8. Helper classes. Add in Elementor, Advanced, CSS Classes. */
+
+/* owu-sticky: right column of the product page stays in view. Desktop only. */
+@media (min-width: 1025px) {
+	.owu-sticky {
+		position: sticky;
+		top: 24px;
+		align-self: flex-start;
+	}
+}
+
+/* owu-announcement: the 43px bar above the header */
+.owu-announcement {
+	background-color: var(--owu-ink);
+	color: var(--owu-paper);
+	font-family: var(--owu-font-ui);
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 1.6;
+	text-align: center;
+}
+
+.owu-announcement a:not(.elementor-button) {
+	color: var(--owu-paper);
+}
+
+/* owu-inverse: footer and dark bars */
+.owu-inverse {
+	background-color: var(--owu-ink);
+	color: var(--owu-paper);
+}
+
+.owu-inverse a:not(.elementor-button) {
+	color: rgba(255, 255, 255, .65);
+}
+
+.owu-inverse a:not(.elementor-button):hover {
+	color: var(--owu-paper);
+}
+
+/* owu-logo-reversed: white logo on a dark bar from the black JPG.
+   Invert turns it white on black; screen blending drops the black box into the bar color. */
+.owu-logo-reversed img {
+	filter: invert(1);
+	mix-blend-mode: screen;
+}
+
+/* owu-clean-grid: optional, hides Add to Cart buttons on product cards */
+.owu-clean-grid ul.products li.product .button {
+	display: none;
+}
