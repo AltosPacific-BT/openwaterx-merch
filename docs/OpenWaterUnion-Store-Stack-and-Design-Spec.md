@@ -228,7 +228,7 @@ WP Engine site is up with WooCommerce and Elementor Pro, with MCP server access.
 * WordPress, WooCommerce, and Elementor Pro versions. Brands needs WooCommerce 9.6 or later (V)
 * The active theme. Hello Elementor is the usual base for Elementor Pro (K)
 
-**Update 2026-10-06:** the theme is Blocksy with Blocksy Companion Pro (Bryan). Theme settings come first; Elementor is for page content only. Blocksy Pro display conditions support Product Brands and single products in a brand, which offers per store headers without Elementor Theme Builder (proposed in `docs/reference/portlandgear-to-blocksy.md`, section 5). Sections 5.2 and 5.3 below predate this.
+**Update 2026-10-06:** the theme is Blocksy with Blocksy Companion Pro (Bryan). Theme settings come first; Elementor is for page content only. Blocksy Pro display conditions support Product Brands and single products in a brand, so per store headers use Blocksy Pro conditional headers (decided, `docs/decisions/004-blocksy-theme-and-conditional-store-headers.md`). Sections 5.2 and 5.3 below predate this and are superseded where they conflict.
 * Whether it is the live domain or a development install, and whether WP Engine staging exists
 * Which MCP server it is (the WordPress MCP Adapter with an Elementor extension is one common setup, V), what tools it exposes, and what access level it has
 * Existing products, pages, and plugins

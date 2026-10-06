@@ -11,6 +11,8 @@ ai_summary: "Translates the Portland Gear Shopify dissection into Blocksy Custom
 
 # Portland Gear look on OWUnion: what to set in Blocksy
 
+**Theme v1.0.** Applied from 2026-10-06. Later changes go in `docs/theme/v1.1-changes.md`.
+
 Source: `docs/reference/portlandgear-shopify-theme-spec.md` (the dissection). Decisions: spec v0.3 section 4 (free fonts, monochrome parent, stores bring their own accent). Version 2: the site runs Blocksy with Blocksy Companion Pro, so theme settings come first. Version 1 assumed Elementor Site Settings and Hello Elementor.
 
 Files:
@@ -145,7 +147,7 @@ The message colors are the reference values with the text darkened to pass contr
 * A Shortcode block with `[owunion_active_stores layout="list" exclude="owunion"]` from the store status plugin, so hidden stores drop out
 * Help links (Shipping, Returns, Size guide, Contact) and Legal links (Privacy, Terms)
 
-**Per store headers (proposed, replaces spec section 5.3).** Blocksy Pro can keep several headers and pick one by display conditions. `K` for the multiple header screen. The conditions engine is in Companion and supports exactly what the spec needs. `S`
+**Per store headers (decided 2026-10-06, decision 004; replaces spec section 5.3).** Blocksy Pro can keep several headers and pick one by display conditions. `K` for the multiple header screen. The conditions engine is in Companion and supports exactly what the spec needs. `S`
 
 * "Product Brands" matches any store page (`is_tax('product_brand')`)
 * "Taxonomy ID", set to one brand, matches that store's page
