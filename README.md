@@ -15,8 +15,8 @@ WooCommerce store for OpenWaterUnion.com on WP Engine: one site, one cart, eight
 * `docs/`, spec and PoC plan
 * `docs/decisions/`, decision records 002 and 003
 * `docs/sessions/`, planning session notes
-* `docs/reference/`, merchandise strategy, Portland Gear theme spec, and its Elementor application (`portlandgear-to-elementor.md`)
-* `elementor/`, site CSS, gallery grid snippet, and the Claude in Chrome prompt for Site Settings
+* `docs/reference/`, merchandise strategy, Portland Gear theme spec, and its application to the Blocksy theme (`portlandgear-to-blocksy.md`)
+* `blocksy/`, Additional CSS and the Claude in Chrome prompt for the Blocksy Customizer
 * `assets/`, logo (JPG only, vectors pending)
 * `plugin/`, store status plugin (to be built, spec section 3)
 

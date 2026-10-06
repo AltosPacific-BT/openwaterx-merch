@@ -190,6 +190,8 @@ Ink on paper is about 19 to 1 contrast. Each store accent must be checked agains
 
 Test in the first week by setting "OPEN WATER UNION" beside the logo: Barlow Condensed, Oswald, Bebas Neue, Anton. Pick the one that sits best with the logo.
 
+**Update 2026-10-06:** tested beside the logo. Barlow Condensed confirmed by Bryan. Settings in `docs/reference/portlandgear-to-blocksy.md`.
+
 Delivery in Elementor: version 3.27 and later can load Google Fonts locally, under Elementor, Settings, Performance (V). Elementor Pro Custom Fonts can instead upload font files (V). Prefer local loading so no request goes to Google. Keep the license file with any uploaded fonts.
 
 Scale on a 16px root: H1 1.875rem mobile to 3rem desktop, H2 1.25 to 1.625, body 1, button weight 500. Headings uppercase, body sentence case.
@@ -225,6 +227,8 @@ WP Engine site is up with WooCommerce and Elementor Pro, with MCP server access.
 
 * WordPress, WooCommerce, and Elementor Pro versions. Brands needs WooCommerce 9.6 or later (V)
 * The active theme. Hello Elementor is the usual base for Elementor Pro (K)
+
+**Update 2026-10-06:** the theme is Blocksy with Blocksy Companion Pro (Bryan). Theme settings come first; Elementor is for page content only. Blocksy Pro display conditions support Product Brands and single products in a brand, which offers per store headers without Elementor Theme Builder (proposed in `docs/reference/portlandgear-to-blocksy.md`, section 5). Sections 5.2 and 5.3 below predate this.
 * Whether it is the live domain or a development install, and whether WP Engine staging exists
 * Which MCP server it is (the WordPress MCP Adapter with an Elementor extension is one common setup, V), what tools it exposes, and what access level it has
 * Existing products, pages, and plugins
