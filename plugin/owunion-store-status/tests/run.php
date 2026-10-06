@@ -16,6 +16,9 @@ $GLOBALS['db'] = array(
 	'parents' => array(),          // variation id => parent id.
 	'caps'    => array(),
 	'actions' => array(),
+	'terms'   => array(),          // term_id => term object, for lookups that return objects.
+	'product' => false,            // is_product().
+	'queried' => 0,                // get_queried_object_id().
 );
 function __( $s ) { return $s; }
 function is_admin() { return false; }
@@ -42,7 +45,16 @@ function get_terms( $args ) {
 }
 function get_post_type( $id ) { return $GLOBALS['db']['types'][ $id ] ?? 'product'; }
 function wp_get_post_parent_id( $id ) { return $GLOBALS['db']['parents'][ $id ] ?? 0; }
-function wp_get_object_terms( $id ) { return $GLOBALS['db']['objects'][ $id ] ?? array(); }
+function wp_get_object_terms( $id, $tax = '', $args = array() ) {
+	$ids = $GLOBALS['db']['objects'][ $id ] ?? array();
+	if ( isset( $args['fields'] ) ) {
+		return $ids;
+	}
+	return array_map( function ( $tid ) { return $GLOBALS['db']['terms'][ $tid ] ?? (object) array( 'term_id' => $tid, 'slug' => "t$tid", 'name' => "T$tid" ); }, $ids );
+}
+function is_product() { return $GLOBALS['db']['product']; }
+function get_queried_object_id() { return $GLOBALS['db']['queried']; }
+function get_term_link( $term ) { return '/brand/' . $term->slug . '/'; }
 function sanitize_title( $s ) { return trim( strtolower( $s ) ); }
 
 class WP_Query {
@@ -56,6 +68,7 @@ class WP_Query {
 
 require __DIR__ . '/../includes/status.php';
 require __DIR__ . '/../includes/frontend.php';
+require __DIR__ . '/../includes/breadcrumbs.php';
 
 // ---- Harness --------------------------------------------------------------
 $fails = 0;
@@ -123,6 +136,33 @@ check( 'menu drops hidden store link only', 2 === count( owunion_filter_menu_ite
 
 check( 're-enable reports changed', true === owunion_set_store_status( 10, 'active' ) );
 check( 're-enable restores', array() === get_option( OWUNION_HIDDEN_OPT ) );
+
+// ---- Breadcrumb: store crumb (theme change 1.1-02) -------------------------
+$GLOBALS['db']['terms'][20]   = (object) array( 'term_id' => 20, 'slug' => 'swim-alcatraz', 'name' => 'Swim Alcatraz' );
+$GLOBALS['db']['terms'][21]   = (object) array( 'term_id' => 21, 'slug' => 'owunion', 'name' => 'OWUnion' );
+$GLOBALS['db']['objects'][300] = array( 20 );
+$GLOBALS['db']['objects'][301] = array( 21 );
+$home  = array( 'name' => 'OWUnion', 'url' => '/', 'type' => 'front_page' );
+$shop  = array( 'name' => 'Shop', 'url' => '/shop/' );
+$cat   = array( 'type' => 'taxonomy', 'name' => 'Hoodies', 'url' => '/product-category/hoodies/', 'taxonomy' => 'product_cat' );
+$title = array( 'type' => 'post', 'post_type' => 'product', 'name' => 'Escape Hoodie', 'url' => '/product/escape-hoodie/' );
+$names = function ( $items ) { return implode( ' / ', array_column( $items, 'name' ) ); };
+
+$GLOBALS['db']['queried'] = 300;
+check( 'crumb: not a product page, unchanged', array( $home, $cat ) === owunion_breadcrumb_add_store( array( $home, $cat ) ) );
+$GLOBALS['db']['product'] = true;
+$out = owunion_breadcrumb_add_store( array( $home, $cat, $title ) );
+check( 'crumb: store before category', 'OWUnion / Swim Alcatraz / Hoodies / Escape Hoodie' === $names( $out ) );
+check( 'crumb: links to the store page', '/brand/swim-alcatraz/' === $out[1]['url'] && 'product_brand' === $out[1]['taxonomy'] );
+check( 'crumb: after the shop item', 'OWUnion / Shop / Swim Alcatraz / Hoodies' === $names( owunion_breadcrumb_add_store( array( $home, $shop, $cat ) ) ) );
+check( 'crumb: no category, before the title', 'OWUnion / Swim Alcatraz / Escape Hoodie' === $names( owunion_breadcrumb_add_store( array( $home, $title ) ) ) );
+check( 'crumb: no category or title, at the end', 'OWUnion / Swim Alcatraz' === $names( owunion_breadcrumb_add_store( array( $home ) ) ) );
+check( 'crumb: no duplicate when present', $out === owunion_breadcrumb_add_store( $out ) );
+$GLOBALS['db']['queried'] = 301;
+check( 'crumb: parent store skipped', array( $home, $cat ) === owunion_breadcrumb_add_store( array( $home, $cat ) ) );
+$GLOBALS['db']['queried'] = 302;
+check( 'crumb: product with no store, unchanged', array( $home, $cat ) === owunion_breadcrumb_add_store( array( $home, $cat ) ) );
+check( 'body class lookup still returns ids', array( 20 ) === wp_get_object_terms( 300, 'product_brand', array( 'fields' => 'ids' ) ) );
 
 echo $fails ? "\n$fails failed\n" : "\nall passed\n";
 exit( $fails ? 1 : 0 );
